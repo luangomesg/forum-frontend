@@ -47,41 +47,54 @@ export default function AuthForm({ type }: { type: FormType }) {
 
   return (
     <Form {...form}>
-      <form className="w-full space-y-4 form">
+      <form className="form">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold mb-2 mt-5">
+          <h1 className="text-3xl font-bold mb-2 mt-5 md:text-5xl md:mt-0 lg:text-6xl">
             {isLogin ? "Entrar" : "Registrar"}
           </h1>
-          <span>Acesse sua conta para continuar</span>
+          <p className="md:text-[20px] lg:text-[25px]">
+            Acesse sua conta para continuar
+          </p>
         </div>
+
         {!isLogin && (
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
+              <FormItem className="form-item">
+                <FormLabel className="form-label">Nome</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} />
+                  <Input
+                    className="input-label"
+                    placeholder="Seu nome"
+                    {...field}
+                  />
                 </FormControl>
-                <div className="min-h-5 ">
-                  <FormMessage />
+                <div className="min-h-7 ">
+                  <FormMessage className="md:text-[16px] lg:text-[18px]" />
                 </div>
               </FormItem>
             )}
           />
         )}
+
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
+            <FormItem className="form-item">
+              <FormLabel className="form-label">Email</FormLabel>
               <FormControl>
-                <Input placeholder="Your email" type="email" {...field} />
+                <Input
+                  className="input-label"
+                  placeholder="Seu email"
+                  type="email"
+                  {...field}
+                />
               </FormControl>
-              <div className="min-h-5">
-                <FormMessage />
+              <div className="min-h-7">
+                <FormMessage className="md:text-[16px] lg:text-[18px]" />
               </div>
             </FormItem>
           )}
@@ -90,13 +103,18 @@ export default function AuthForm({ type }: { type: FormType }) {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
+            <FormItem className="form-item">
+              <FormLabel className="form-label">Senha</FormLabel>
               <FormControl>
-                <Input placeholder="Your password" type="password" {...field} />
+                <Input
+                  className="input-label"
+                  placeholder="Sua senha"
+                  type="password"
+                  {...field}
+                />
               </FormControl>
-              <div className="min-h-5">
-                <FormMessage />
+              <div className="min-h-7 ">
+                <FormMessage className="md:text-[16px] lg:text-[18px]" />
               </div>
             </FormItem>
           )}
@@ -104,7 +122,7 @@ export default function AuthForm({ type }: { type: FormType }) {
         <Button type="submit" className="btn">
           {isLogin ? "Entrar" : "Registrar"}
         </Button>
-        <p className="text-center">
+        <p className="text-center md:text-[20px] lg:text-[25px]">
           {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
           <Link
             href={isLogin ? "/register" : "/login"}
