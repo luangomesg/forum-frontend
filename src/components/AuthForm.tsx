@@ -13,6 +13,9 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { api } from "@/src/services/api";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -33,6 +36,7 @@ const authFormSchema = (type: FormType) => {
 
 export default function AuthForm({ type }: { type: FormType }) {
   const formSchema = authFormSchema(type);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,11 +47,47 @@ export default function AuthForm({ type }: { type: FormType }) {
     },
     mode: "onChange",
   });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      if (type === "register") {
+        await api("/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: values.name,
+            email: values.email,
+            password: values.password,
+          }),
+        });
+
+        toast.success("Conta criada com sucesso!");
+
+        router.push("/login");
+      }
+
+      if (type === "login") {
+        await api("/auth/signin", {
+          method: "POST",
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        });
+        toast.success("Login realizado com sucesso!");
+        router.push("/");
+      }
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Erro ao criar a conta";
+      toast.error(errorMessage);
+    }
+  }
   const isLogin = type === "login";
+  const isSubmitting = form.formState.isSubmitting;
 
   return (
     <Form {...form} key={type}>
-      <form className="form">
+      <form className="form" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold mb-2 mt-5 md:text-5xl md:mt-0 lg:text-6xl">
             {isLogin ? "Entrar" : "Registrar"}
@@ -119,8 +159,8 @@ export default function AuthForm({ type }: { type: FormType }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="btn">
-          {isLogin ? "Entrar" : "Registrar"}
+        <Button type="submit" className="btn" disabled={isSubmitting}>
+          {isSubmitting ? "Carregando..." : isLogin ? "Entrar" : "Registrar"}
         </Button>
         <p className="text-center md:text-[20px] lg:text-[25px]">
           {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
