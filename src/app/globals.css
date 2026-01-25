@@ -150,10 +150,10 @@ body {
 
 @layer components {
   .form {
-    @apply flex flex-col justify-center w-full space-y-4 bg-background px-8 py-5 min-h-[95vh] rounded-4xl border border-border md:max-w-[90%] md:px-12 md:py-7 md:min-h-[90vh] md:mx-auto md:space-y-8 lg:max-w-[50%] lg:min-h-[90vh] lg:px-16 lg:py-10 lg:mx-auto lg:space-y-12;
+    @apply flex flex-col justify-center w-full space-y-4 bg-background px-8 py-5 min-h-[95vh] rounded-4xl border border-border md:max-w-[90%] md:px-12 md:py-7 md:min-h-[90vh] md:mx-auto md:space-y-8 lg:max-w-[50%] lg:max-h-[95vh] lg:px-16 lg:py-10 lg:mx-auto;
 
     .btn {
-      @apply w-full! bg-primary! text-primary-foreground! rounded-full! min-h-10! font-bold! px-5! cursor-pointer! md:min-h-12! md:text-2xl! lg:min-h-14! lg:text-3xl! lg:max-w-[70%]! lg:mx-auto!;
+      @apply w-full! bg-primary! text-primary-foreground! rounded-full! min-h-10! font-bold! px-5! cursor-pointer! md:min-h-14! md:text-2xl! lg:min-h-14! lg:text-3xl! lg:max-w-[70%]! lg:mx-auto!;
       @apply hover:bg-primary/80!;
     }
 
@@ -162,11 +162,30 @@ body {
     }
 
     .input-label {
-      @apply border-input! focus-visible:ring-ring! md:h-12! md:text-[18px]! lg:h-14! lg:text-[20px]!;
+      @apply border-input! focus-visible:ring-ring! md:h-12! md:text-[18px]! lg:max-h-14! lg:text-[20px]!;
     }
 
     .form-item {
       @apply lg:min-w-[70%]! lg:mx-auto!;
+    }
+
+    @media ((max-height: 800px) and (min-width: 768px)) {
+      .btn {
+        @apply min-h-12!;
+      }
+    }
+  }
+
+  @media ((max-height: 800px) and (min-width: 768px)) {
+    .form {
+      @apply space-y-3!;
+      h1 {
+        @apply text-5xl! -mt-7!;
+      }
+
+      p {
+        @apply text-[20px]! mb-3;
+      }
     }
   }
 

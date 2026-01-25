@@ -46,13 +46,13 @@ export default function AuthForm({ type }: { type: FormType }) {
   const isLogin = type === "login";
 
   return (
-    <Form {...form}>
+    <Form {...form} key={type}>
       <form className="form">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold mb-2 mt-5 md:text-5xl md:mt-0 lg:text-6xl">
             {isLogin ? "Entrar" : "Registrar"}
           </h1>
-          <p className="md:text-[20px] lg:text-[25px]">
+          <p className="text-center md:text-[20px] lg:text-[25px]">
             Acesse sua conta para continuar
           </p>
         </div>
