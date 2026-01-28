@@ -16,6 +16,7 @@ import Link from "next/link";
 import { api } from "@/src/services/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { FormType } from "../types";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
