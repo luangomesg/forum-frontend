@@ -15,8 +15,22 @@ export async function api<T = unknown>(
   });
 
   if (!response.ok) {
-    const text = await response.text();
-    throw new Error(text || "Erro na requisição");
+    let message = "Erro na requisição";
+
+    try {
+      const errorBody = await response.json();
+
+      if (typeof errorBody.message === "string") {
+        message = errorBody.message;
+      } else if (Array.isArray(errorBody.message)) {
+        message = errorBody.message[0];
+      }
+    } catch {
+      const text = await response.text();
+      if (text) message = text;
+    }
+
+    throw new Error(message);
   }
 
   if (response.status === 204) {

@@ -20,17 +20,19 @@ import { FormType } from "../types";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
-    email: z.email("Invalid email address").nonempty("Email is required"),
+    email: z
+      .email("Endereço de email inválido")
+      .nonempty("Email é obrigatório"),
     password: z
       .string()
-      .min(6, "Password must be at least 6 characters")
-      .nonempty("Password is required"),
+      .min(6, "A senha deve ter pelo menos 6 caracteres")
+      .nonempty("Senha é obrigatória"),
     name:
       type === "register"
         ? z
             .string()
-            .min(2, "Name must be at least 2 characters")
-            .nonempty("Name is required")
+            .min(2, "Nome deve ter pelo menos 2 caracteres")
+            .nonempty("Nome é obrigatório")
         : z.string().optional(),
   });
 };

@@ -2,18 +2,32 @@ import { api } from "@/src/services/api";
 import { User } from "@/src/types";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import logo from "../../../assets/images/logo.png";
 import logoLg from "../../../assets/images/yourforum-logo.svg";
 
 export default async function Home() {
   const cookieStore = cookies();
   const token = (await cookieStore).get("access_token")?.value;
-  const user = await api<User>("/user/me", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+
+  if (!token) {
+    redirect("/");
+  }
+
+  let user: User;
+
+  try {
+    user = await api<User>("/user/me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    redirect("/");
+  }
+
   return (
     <div className="hub">
       <header className="space-y-1">
