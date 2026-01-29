@@ -75,7 +75,7 @@ export default function AuthForm({ type }: { type: FormType }) {
           }),
         });
         toast.success("Login realizado com sucesso!");
-        router.push("/");
+        router.push("/hub");
       }
     } catch (error) {
       const errorMessage =

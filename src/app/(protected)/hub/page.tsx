@@ -2,7 +2,7 @@ import { api } from "@/src/services/api";
 import { User } from "@/src/types";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import logo from "../../assets/images/logo.png";
+import logo from "../../../assets/images/logo.png";
 
 export default async function Home() {
   const cookieStore = cookies();
