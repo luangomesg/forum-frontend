@@ -1,0 +1,65 @@
+<svg
+  width="550"
+  height="120"
+  viewBox="0 0 500 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="bubbleBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4F8BFF" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <linearGradient id="bubbleGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+
+    <linearGradient id="textForum" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+
+  <!-- Green bubble (back) -->
+  <path
+    d="M78 42C78 28.7 88.7 18 102 18H142C155.3 18 166 28.7 166 42V70C166 83.3 155.3 94 142 94H120L104 108V94H102C88.7 94 78 83.3 78 70V42Z"
+    fill="url(#bubbleGreen)"
+  />
+
+  <!-- Blue bubble (front) -->
+  <path
+    d="M40 30C40 18.4 49.4 9 61 9H101C112.6 9 122 18.4 122 30V58C122 69.6 112.6 79 101 79H83L67 92V79H61C49.4 79 40 69.6 40 58V30Z"
+    fill="url(#bubbleBlue)"
+  />
+
+  <!-- Dots -->
+  <circle cx="68" cy="45" r="4" fill="#0F172A" />
+  <circle cx="82" cy="45" r="4" fill="#0F172A" />
+  <circle cx="96" cy="45" r="4" fill="#0F172A" />
+
+  <!-- Text: Your -->
+  <text
+    x="190"
+    y="70"
+    font-size="48"
+    font-weight="700"
+    fill="#FFFFFF"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+  >
+    Your
+  </text>
+
+  <!-- Text: Forum -->
+  <text
+    x="300"
+    y="70"
+    font-size="48"
+    font-weight="700"
+    fill="url(#textForum)"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+  >
+    Forum
+  </text>
+</svg>

@@ -188,10 +188,10 @@ body {
   }
 
   .hub {
-    @apply flex flex-col justify-evenly items-center bg-background font-bold border border-border rounded-3xl text-center w-full px-8 py-5 min-h-[95vh];
+    @apply flex flex-col justify-evenly items-center bg-background font-bold border border-border rounded-3xl text-center w-full px-8 py-5 min-h-[95vh] lg:grid lg:grid-cols-2 lg:py-16 lg:max-w-[95vw];
 
     button {
-      @apply bg-primary text-primary-foreground border border-sidebar-border text-lg px-8 py-3 rounded-4xl hover:bg-primary/80 transition cursor-pointer;
+      @apply bg-primary text-primary-foreground border border-sidebar-border text-[1rem] px-8 py-3 rounded-4xl hover:bg-primary/80 transition cursor-pointer md:px-16 md:py-4 md:text-2xl;
     }
   }
 }
