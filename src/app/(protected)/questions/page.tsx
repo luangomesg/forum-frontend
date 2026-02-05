@@ -1,12 +1,4 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { formatRelativeTime } from "@/lib/utils";
+import {} from "@/components/ui/card";
 import { QuestionCard } from "@/src/components/QuestionCard";
 import { api } from "@/src/services/api";
 import { Question } from "@/src/types";
