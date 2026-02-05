@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
 import { Question } from "@/src/types";
+import { api } from "../services/api";
 
 interface Props {
   question: Question;
@@ -20,6 +21,25 @@ interface Props {
 
 export function QuestionCard({ question }: Props) {
   const [open, setOpen] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmitAnswer() {
+    if (!answer.trim()) return;
+
+    try {
+      await api(`/answers/${question.id}`, {
+        method: "POST",
+        body: JSON.stringify({ body: answer }),
+      });
+      setAnswer("");
+      window.location.reload();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -81,12 +101,15 @@ export function QuestionCard({ question }: Props) {
               <Textarea
                 className="p-5 mx-auto md:text-[1.1rem]! lg:w-[80%]"
                 placeholder="Escreva sua resposta..."
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
               />
               <Button
                 size="lg"
                 className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem]"
+                onClick={handleSubmitAnswer}
               >
-                Responder
+                {loading ? "Enviando..." : "Responder"}
               </Button>
             </div>
           </CardContent>
