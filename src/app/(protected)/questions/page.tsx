@@ -1,5 +1,5 @@
 import {} from "@/components/ui/card";
-import { QuestionCard } from "@/src/components/QuestionCard";
+import { QuestionsList } from "@/src/components/QuestionList";
 import { api } from "@/src/services/api";
 import { Question } from "@/src/types";
 import { cookies } from "next/headers";
@@ -23,9 +23,7 @@ export default async function QuestionsPage() {
   }
   return (
     <div className="questions">
-      {questions.map((question) => (
-        <QuestionCard key={question.id} question={question} />
-      ))}
+      <QuestionsList questions={questions} />
     </div>
   );
 }

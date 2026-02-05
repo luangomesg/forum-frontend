@@ -44,7 +44,7 @@ export function QuestionCard({ question }: Props) {
   return (
     <>
       <Card
-        className="Card transition hover:bg-background/30 mb-6 border-primary"
+        className="Card transition hover:bg-background/30 mb-6 mt-10 border-primary"
         onClick={() => setOpen((prev) => !prev)}
       >
         <CardHeader className="cursor-pointer">
