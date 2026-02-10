@@ -33,16 +33,17 @@ export function QuestionsList({ questions }: Props) {
         onChange={(e) => setSearch(e.target.value)}
         className="mb-6 mt-2 absolute top-0 mx-auto w-[80%] md:text-lg md:w-[70%] lg:w-[50%] lg:mt-4"
       />
-
-      {filteredQuestions.length === 0 ? (
-        <p className="text-muted-foreground text-lg">
-          Nenhuma pergunta encontrada 😕
-        </p>
-      ) : (
-        filteredQuestions.map((question) => (
-          <QuestionCard key={question.id} question={question} />
-        ))
-      )}
+      <div className="flex flex-col w-full justify-center items-center lg:grid lg:grid-cols-3 lg:items-start">
+        {filteredQuestions.length === 0 ? (
+          <p className="text-muted-foreground text-lg">
+            Nenhuma pergunta encontrada 😕
+          </p>
+        ) : (
+          filteredQuestions.map((question) => (
+            <QuestionCard key={question.id} question={question} />
+          ))
+        )}
+      </div>
     </>
   );
 }

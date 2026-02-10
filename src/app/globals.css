@@ -199,7 +199,7 @@ body {
     @apply flex flex-col justify-evenly items-center font-bold text-center w-full px-8 py-5 min-h-[95vh];
 
     .Card {
-      @apply w-full md:w-[80%] lg:w-[60%];
+      @apply w-full md:w-[80%] lg:mx-auto;
     }
   }
 }

@@ -23,7 +23,7 @@ export function QuestionCard({ question }: Props) {
   const [open, setOpen] = useState(false);
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [openCard, setOpenCard] = useState(false);
   async function handleSubmitAnswer() {
     if (!answer.trim()) return;
 
@@ -44,11 +44,16 @@ export function QuestionCard({ question }: Props) {
   return (
     <>
       <Card
-        className="Card transition hover:bg-background/30 mb-6 mt-10 border-primary z-10"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          setOpen((prev) => !prev);
+          setOpenCard(!openCard);
+        }}
+        className={`Card transition-all duration-300 hover:bg-background/30 mb-6 mt-10 border-primary lg:w-[80%]`}
       >
         <CardHeader className="cursor-pointer">
-          <CardTitle className="md:text-2xl lg:text-3xl">
+          <CardTitle
+            className={`whitespace-nowrap overflow-hidden text-ellipsis md:text-2xl lg:text-3xl lg:${openCard ? "whitespace-normal" : "whitespace-nowrap"}`}
+          >
             {question.title}
           </CardTitle>
           <CardDescription className="md:text-[1rem] lg:text-[1.1rem]">
@@ -86,11 +91,11 @@ export function QuestionCard({ question }: Props) {
               </div>
             )}
             {/* Respostas */}
-            <div className="space-y-3 mt-2">
+            <div className="space-y-3 mt-2 lg:space-y-6">
               {question.answers.map((answer) => (
                 <div
                   key={answer.id}
-                  className="rounded-md p-3 border border-border bg-input/30 md:p-5 md:relative md:space-y-3"
+                  className="rounded-md p-3 border border-border bg-input/30 md:p-5 md:relative md:space-y-3 lg:pt-3"
                 >
                   <p className="text-sm text-center font-normal md:text-[1.2rem] md:text-start lg:text-[1.3rem]">
                     {answer.body}
@@ -115,7 +120,7 @@ export function QuestionCard({ question }: Props) {
               />
               <Button
                 size="lg"
-                className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem] md:p-6 md:min-w-75"
+                className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem] md:p-6 md:min-w-75 lg:min-w-full"
                 onClick={handleSubmitAnswer}
               >
                 {loading ? "Enviando..." : "Responder"}
