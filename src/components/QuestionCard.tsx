@@ -44,7 +44,7 @@ export function QuestionCard({ question }: Props) {
   return (
     <>
       <Card
-        className="Card transition hover:bg-background/30 mb-6 mt-10 border-primary"
+        className="Card transition hover:bg-background/30 mb-6 mt-10 border-primary z-10"
         onClick={() => setOpen((prev) => !prev)}
       >
         <CardHeader className="cursor-pointer">
@@ -70,7 +70,7 @@ export function QuestionCard({ question }: Props) {
             className="space-y-4 border-t border-l border-r border-border"
             onClick={(e) => e.stopPropagation()} // evita fechar ao clicar dentro
           >
-            <h1 className="text-[1.1rem] mx-auto font-bold text-foreground border border-ring mt-3 p-3 rounded-md md:text-[1.4rem] lg:text-[1.6rem] lg:w-[80%]">
+            <h1 className="text-[1.1rem] mx-auto font-bold text-foreground border border-ring mt-3 p-3 rounded-md md:text-[1.4rem] lg:text-[1.6rem] ">
               {question.body}
             </h1>
             {question.answers.length === 0 ? (
@@ -78,35 +78,44 @@ export function QuestionCard({ question }: Props) {
                 Ainda sem respostas...
               </span>
             ) : (
-              <span className="text-[1.2rem] md:text-[1.4rem] lg:text-[1.6rem]">
-                Respostas:
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-sm md:text-[1.4rem] lg:text-[1.6rem]">
+                  Respostas ({question.answers.length})
+                </span>
+                <hr className="grow border-0 border-t-2 border-t-[#333]" />
+              </div>
             )}
             {/* Respostas */}
             <div className="space-y-3 mt-2">
               {question.answers.map((answer) => (
-                <div key={answer.id} className="rounded-md p-3 ">
-                  <p className="text-sm mx-auto font-normal md:text-[1.1rem] lg:text-[1.3rem] lg:w-[80%]">
+                <div
+                  key={answer.id}
+                  className="rounded-md p-3 border border-border bg-input/30 md:p-5 md:relative md:space-y-3"
+                >
+                  <p className="text-sm text-center font-normal md:text-[1.2rem] md:text-start lg:text-[1.3rem]">
                     {answer.body}
                   </p>
-                  <span className="text-xs text-muted-foreground md:text-[1rem]">
-                    {answer.user.name} • {formatRelativeTime(answer.createdAt)}
+                  <span className="text-[0.7rem] text-muted-foreground md:text-[1rem] md:text-start md:absolute md:left-5 md:bottom-0">
+                    <p>
+                      {answer.user.name} •{" "}
+                      {formatRelativeTime(answer.createdAt)}
+                    </p>
                   </span>
-                  <hr className="mt-3 -mb-3" />
+                  {/* <hr className="mt-3 -mb-3" /> */}
                 </div>
               ))}
             </div>
             {/* Responder */}
             <div className="space-y-4">
               <Textarea
-                className="p-5 mx-auto md:text-[1.1rem]! lg:w-[80%]"
+                className="p-5 mx-auto md:text-[1.1rem]! "
                 placeholder="Escreva sua resposta..."
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
               <Button
                 size="lg"
-                className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem]"
+                className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem] md:p-6 md:min-w-75"
                 onClick={handleSubmitAnswer}
               >
                 {loading ? "Enviando..." : "Responder"}
