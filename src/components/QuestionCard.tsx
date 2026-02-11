@@ -9,6 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
@@ -20,10 +27,10 @@ interface Props {
 }
 
 export function QuestionCard({ question }: Props) {
-  const [open, setOpen] = useState(false);
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  const [openCard, setOpenCard] = useState(false);
+  const [showAllAnswers, setShowAllAnswers] = useState(false);
+
   async function handleSubmitAnswer() {
     if (!answer.trim()) return;
 
@@ -40,95 +47,102 @@ export function QuestionCard({ question }: Props) {
       setLoading(false);
     }
   }
+  const hasMoreThanOne = question.answers.length > 1;
+
+  const visibleAnswers = showAllAnswers
+    ? question.answers
+    : question.answers.slice(0, 1);
 
   return (
     <>
-      <Card
-        onClick={() => {
-          setOpen((prev) => !prev);
-          setOpenCard(!openCard);
-        }}
-        className={`Card transition-all duration-300 hover:bg-background/30 mb-6 mt-10 border-primary lg:w-[80%]`}
-      >
-        <CardHeader className="cursor-pointer">
-          <CardTitle
-            className={`whitespace-nowrap overflow-hidden text-ellipsis md:text-2xl lg:text-3xl lg:${openCard ? "whitespace-normal" : "whitespace-nowrap"}`}
-          >
-            {question.title}
-          </CardTitle>
-          <CardDescription className="md:text-[1rem] lg:text-[1.1rem]">
-            {question.answers.length == 1
-              ? "1 resposta"
-              : `${question.answers.length} respostas`}{" "}
-            • {formatRelativeTime(question.createdAt)}
-          </CardDescription>
-        </CardHeader>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Card className="Card cursor-pointer transition-all duration-300 hover:bg-background/30 mb-6 mt-10 border-primary lg:w-[80%]">
+            <CardHeader>
+              <CardTitle className="md:text-2xl lg:text-3xl">
+                {question.title}
+              </CardTitle>
+              <CardDescription className="md:text-[1rem] lg:text-[1.1rem]">
+                {question.answers.length === 1
+                  ? "1 resposta"
+                  : `${question.answers.length} respostas`}{" "}
+                • {formatRelativeTime(question.createdAt)}
+              </CardDescription>
+            </CardHeader>
 
-        <CardContent className="flex gap-2 mx-auto">
-          <Badge className="md:text-[1rem]">
-            Criador: {question.user.name}
-          </Badge>
-        </CardContent>
+            <CardContent className="flex gap-2 mx-auto">
+              <Badge className="md:text-[1rem]">
+                Criador: {question.user.name}
+              </Badge>
+            </CardContent>
+          </Card>
+        </DialogTrigger>
 
-        {open && (
-          <CardContent
-            className="space-y-4 border-t border-l border-r border-border"
-            onClick={(e) => e.stopPropagation()} // evita fechar ao clicar dentro
-          >
-            <h1 className="text-[1.1rem] mx-auto font-bold text-foreground border border-ring mt-3 p-3 rounded-md md:text-[1.4rem] lg:text-[1.6rem] ">
+        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[70vh] lg:min-w-[35vw] lg:min-h-[80vh] ">
+          <DialogHeader className="self-center">
+            <DialogTitle className="text-2xl text-center first-letter:uppercase">
+              {question.title}
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="flex flex-col space-y-6 ">
+            <p className="text-lg text-center font-bold first-letter:uppercase">
               {question.body}
-            </h1>
-            {question.answers.length === 0 ? (
-              <span className="text-[1.2rem] md:text-[1.4rem] lg:text-[1.6rem]">
-                Ainda sem respostas...
-              </span>
-            ) : (
+            </p>
+
+            {/* Respostas */}
+            <div>
               <div className="flex items-center gap-3">
-                <span className="text-sm md:text-[1.4rem] lg:text-[1.6rem]">
+                <h3 className="text-lg font-semibold mb-4">
                   Respostas ({question.answers.length})
-                </span>
+                </h3>
                 <hr className="grow border-0 border-t-2 border-t-[#333]" />
               </div>
-            )}
-            {/* Respostas */}
-            <div className="space-y-3 mt-2 lg:space-y-6">
-              {question.answers.map((answer) => (
+
+              {visibleAnswers.map((answer) => (
                 <div
                   key={answer.id}
-                  className="rounded-md p-3 border border-border bg-input/30 md:p-5 md:relative md:space-y-3 lg:pt-3"
+                  className="rounded-md p-4 border border-border bg-muted/40 mb-4"
                 >
-                  <p className="text-sm text-center font-normal md:text-[1.2rem] md:text-start lg:text-[1.3rem]">
-                    {answer.body}
-                  </p>
-                  <span className="text-[0.7rem] text-muted-foreground md:text-[1rem] md:text-start md:absolute md:left-5 md:bottom-0">
-                    <p>
-                      {answer.user.name} •{" "}
-                      {formatRelativeTime(answer.createdAt)}
-                    </p>
+                  <p className="first-letter:uppercase">{answer.body}</p>
+                  <span className="text-sm text-muted-foreground">
+                    {answer.user.name} • {formatRelativeTime(answer.createdAt)}
                   </span>
-                  {/* <hr className="mt-3 -mb-3" /> */}
                 </div>
               ))}
+
+              {hasMoreThanOne && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowAllAnswers((prev) => !prev)}
+                >
+                  {showAllAnswers
+                    ? "Mostrar menos"
+                    : `Ver mais ${question.answers.length - 1} respostas`}
+                </Button>
+              )}
             </div>
+
             {/* Responder */}
-            <div className="space-y-4">
+            <div className="flex flex-col space-y-4 ">
               <Textarea
-                className="p-5 mx-auto md:text-[1.1rem]! "
                 placeholder="Escreva sua resposta..."
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
               />
+
               <Button
-                size="lg"
-                className="text-[1rem] cursor-pointer font-bold md:text-[1.4rem] md:p-6 md:min-w-75 lg:min-w-full"
                 onClick={handleSubmitAnswer}
+                disabled={loading}
+                className="cursor-pointer mt-3"
               >
                 {loading ? "Enviando..." : "Responder"}
               </Button>
             </div>
-          </CardContent>
-        )}
-      </Card>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
