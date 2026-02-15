@@ -204,14 +204,14 @@ body {
   }
 
   .btn-back-hub {
-    @apply border border-sidebar py-1 px-10 rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[80vw] hover:bg-primary/90 md:text-[20px] md:w-full md:rounded-b-none md:bg-card md:text-card-foreground md:border-2 md:border-primary md:hover:bg-primary/10;
+    @apply border border-sidebar py-1 px-10 rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[80vw] hover:bg-primary/90 md:text-[20px] md:w-full md:rounded-b-none md:bg-card md:text-card-foreground md:border-2 md:border-primary md:hover:bg-primary/10 lg:w-[80%] lg:py-10 lg:rounded-xl lg:text-[25px];
   }
 
   .card-new-question {
-    @apply flex min-w-[85%] max-w-[85%] h-[15vh] border-t-2 border-l-2 border-r-2 border-primary rounded-t-xl justify-center items-center bg-sidebar-primary/5 md:rounded-t-none;
+    @apply flex min-w-[85%] max-w-[85%] h-[15vh] border-t-2 border-l-2 border-r-2 border-primary rounded-t-xl justify-center items-center bg-sidebar-primary/5 md:rounded-t-none lg:min-w-[70%];
   }
 
   .form-new-question {
-    @apply flex flex-col min-w-[85%] max-w-[85%] bg-card text-card-foreground border-2 border-primary rounded-b-xl py-6 px-6 md:space-y-6;
+    @apply flex flex-col min-w-[85%] max-w-[85%] bg-card text-card-foreground border-2 border-primary rounded-b-xl py-6 px-6 md:space-y-6 lg:min-w-[70%] lg:max-w-[70%];
   }
 }

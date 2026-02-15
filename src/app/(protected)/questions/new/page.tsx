@@ -12,11 +12,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/src/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import logoLg from "../../../../assets/images/yourforum-logo.svg";
 
 const formSchema = z.object({
   title: z
@@ -64,10 +66,18 @@ export default function AnswersPage() {
   const isSubmitting = form.formState.isSubmitting;
   return (
     <Form {...form}>
-      <Link href="/hub" className="absolute top-1 md:relative md:min-w-[85%] ">
-        <button className="btn-back-hub">Voltar ao HUB</button>
-      </Link>
-      <div className="flex flex-col items-center w-full">
+      <div className="absolute top-1 md:relative md:min-w-[85%] lg:flex lg:flex-col lg:space-y-15 lg:min-w-[40%]">
+        <Link href="/hub" className="lg:w-full lg:text-center">
+          <button className="btn-back-hub">Voltar ao HUB</button>
+        </Link>
+        <Image
+          src={logoLg}
+          alt="YourForum Logo"
+          className="hidden lg:block drop-shadow-lg lg:col-start-1 lg:mx-auto lg:w-[75%]"
+          priority
+        />
+      </div>
+      <div className="flex flex-col items-center w-full lg:w-[50%]">
         <div className="card-new-question">
           <h1 className="font-bold text-[20px] md:text-[30px]">
             Criar Nova Pergunta
