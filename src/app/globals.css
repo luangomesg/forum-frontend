@@ -184,7 +184,7 @@ body {
   }
 
   .auth-layout {
-    @apply flex justify-center items-center mx-auto min-h-screen max-sm:px-4 bg-auth;
+    @apply flex flex-col justify-center items-center mx-auto min-h-screen max-sm:px-4 bg-auth;
   }
 
   .hub {
