@@ -202,4 +202,16 @@ body {
       @apply w-full md:w-[80%] lg:mx-auto;
     }
   }
+
+  .btn-back-hub {
+    @apply border border-sidebar py-1 px-10 rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[80vw] hover:bg-primary/90 md:text-[20px] md:w-full md:rounded-b-none md:bg-card md:text-card-foreground md:border-2 md:border-primary md:hover:bg-primary/10;
+  }
+
+  .card-new-question {
+    @apply flex min-w-[85%] max-w-[85%] h-[15vh] border-t-2 border-l-2 border-r-2 border-primary rounded-t-xl justify-center items-center bg-sidebar-primary/5 md:rounded-t-none;
+  }
+
+  .form-new-question {
+    @apply flex flex-col min-w-[85%] max-w-[85%] bg-card text-card-foreground border-2 border-primary rounded-b-xl py-6 px-6 md:space-y-6;
+  }
 }

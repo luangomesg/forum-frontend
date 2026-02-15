@@ -64,17 +64,17 @@ export default function AnswersPage() {
   const isSubmitting = form.formState.isSubmitting;
   return (
     <Form {...form}>
-      <Link href="/hub" className="absolute top-1 ">
-        <button className="border border-sidebar py-1 px-10 rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[80vw] hover:bg-primary/90">
-          Voltar ao HUB
-        </button>
+      <Link href="/hub" className="absolute top-1 md:relative md:min-w-[85%] ">
+        <button className="btn-back-hub">Voltar ao HUB</button>
       </Link>
       <div className="flex flex-col items-center w-full">
-        <div className="flex min-w-[85%] max-w-[85%] h-[15vh] border-t border-l border-r border-primary rounded-t-xl justify-center items-center bg-sidebar-primary/5">
-          <h1 className="font-bold text-[20px]">Criar Nova Pergunta</h1>
+        <div className="card-new-question">
+          <h1 className="font-bold text-[20px] md:text-[30px]">
+            Criar Nova Pergunta
+          </h1>
         </div>
         <form
-          className="flex flex-col min-w-[85%] max-w-[85%] bg-card text-card-foreground border border-primary rounded-b-xl py-6 px-6"
+          className="form-new-question"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
@@ -82,9 +82,14 @@ export default function AnswersPage() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Titulo</FormLabel>
+                <FormLabel className="md:text-[19px]"> Titulo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Titulo" {...field} maxLength={60} />
+                  <Input
+                    className="md:text-[19px] md:py-6"
+                    placeholder="Titulo"
+                    {...field}
+                    maxLength={60}
+                  />
                 </FormControl>
                 <div className="min-h-7 ">
                   <FormMessage className="text-[11px] md:text-[16px] lg:text-[18px]" />
@@ -98,9 +103,10 @@ export default function AnswersPage() {
             name="body"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descrição</FormLabel>
+                <FormLabel className="md:text-[19px]">Descrição</FormLabel>
                 <FormControl>
                   <Textarea
+                    className="md:text-[19px] md:py-6"
                     placeholder="Escreva sua pergunta..."
                     {...field}
                     maxLength={1000}
@@ -113,7 +119,7 @@ export default function AnswersPage() {
             )}
           ></FormField>
           <Button
-            className=" cursor-pointer font-bold"
+            className=" cursor-pointer font-bold md:text-[21px] md:py-6"
             type="submit"
             disabled={isSubmitting}
           >
