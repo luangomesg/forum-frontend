@@ -57,7 +57,7 @@ export function QuestionCard({ question }: Props) {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Card className="Card cursor-pointer transition-all duration-300 hover:bg-background/30 mb-6 mt-10 border-primary lg:w-[80%]">
+          <Card className="Card cursor-pointer transition-all duration-300 hover:bg-background/30 border-primary lg:w-[80%]">
             <CardHeader>
               <CardTitle className=" overflow-hidden w-full lg:w-64">
                 <h1 className="truncate md:text-[20px] lg:text-[25px]">

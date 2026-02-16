@@ -199,7 +199,7 @@ body {
     @apply flex flex-col justify-evenly items-center font-bold text-center w-full px-8 py-5 min-h-[95vh];
 
     .Card {
-      @apply w-full max-w-77.5 max-h-42.5 md:w-[80%] lg:mx-auto;
+      @apply w-full max-w-77.5 max-h-42.5 md:w-[80%] mt-15 lg:mx-auto;
     }
   }
 
@@ -213,5 +213,9 @@ body {
 
   .form-new-question {
     @apply flex flex-col min-w-[85%] max-w-[85%] bg-card text-card-foreground border-2 border-primary rounded-b-xl py-6 px-6 md:space-y-6 lg:min-w-[70%] lg:max-w-[70%];
+  }
+
+  .btn-back-hub-two {
+    @apply border border-sidebar rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[10vw] hover:bg-primary/90 md:w-[6vw] lg:w-11.25;
   }
 }

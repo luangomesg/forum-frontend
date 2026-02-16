@@ -4,6 +4,9 @@ import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { QuestionCard } from "@/src/components/QuestionCard";
 import { Question } from "@/src/types";
+import Link from "next/link";
+import Image from "next/image";
+import backArrow from "../assets/icons/icons8-voltar-64.png";
 
 interface Props {
   questions: Question[];
@@ -27,12 +30,20 @@ export function QuestionsList({ questions }: Props) {
 
   return (
     <>
-      <Input
-        placeholder="Buscar perguntas..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-6 mt-2 absolute top-0 mx-auto w-[80%] md:text-lg md:w-[70%] lg:w-[50%] lg:mt-4"
-      />
+      <div className="flex flex-row-reverse w-[80%] absolute top-0 items-center justify-center mt-2 lg:mt-4 lg:w-[70%] gap-3 md:gap-5 lg:gap-5">
+        <Input
+          placeholder="Buscar perguntas..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className=" w-[80%] "
+        />
+        <Link href="/hub" className="flex lg:text-center">
+          <button className="btn-back-hub-two">
+            <Image src={backArrow} alt="icone para voltar ao hub" />
+          </button>
+        </Link>
+      </div>
+
       <div className="flex flex-col w-full justify-center items-center lg:grid lg:grid-cols-3 lg:items-start">
         {filteredQuestions.length === 0 ? (
           <p className="text-muted-foreground text-lg">
