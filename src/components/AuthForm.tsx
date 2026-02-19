@@ -56,6 +56,7 @@ export default function AuthForm({ type }: { type: FormType }) {
       if (type === "register") {
         await api("/user", {
           method: "POST",
+          credentials: "include",
           body: JSON.stringify({
             name: values.name,
             email: values.email,
@@ -71,6 +72,7 @@ export default function AuthForm({ type }: { type: FormType }) {
       if (type === "login") {
         await api("/auth/signin", {
           method: "POST",
+          credentials: "include",
           body: JSON.stringify({
             email: values.email,
             password: values.password,

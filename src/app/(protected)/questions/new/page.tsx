@@ -49,6 +49,7 @@ export default function AnswersPage() {
     try {
       await api("/questions", {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
           title: values.title,
           body: values.body,

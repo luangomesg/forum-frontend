@@ -18,6 +18,7 @@ export default async function Home() {
   try {
     user = await api<User>("/user/me", {
       method: "GET",
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -37,6 +37,7 @@ export function QuestionCard({ question }: Props) {
     try {
       await api(`/answers/${question.id}`, {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({ body: answer }),
       });
       setAnswer("");

@@ -13,6 +13,7 @@ export default async function QuestionsPage() {
   try {
     questions = await api<Question[]>("/questions", {
       method: "GET",
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
       },
