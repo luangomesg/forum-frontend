@@ -21,9 +21,7 @@ export async function POST(request: Request) {
     return NextResponse.json(data, { status: response.status });
   }
 
-  // 🔥 Criando cookie no domínio do frontend
   (await
-        // 🔥 Criando cookie no domínio do frontend
         cookies()).set("access_token", data.access_token, {
     httpOnly: true,
     secure: true,
