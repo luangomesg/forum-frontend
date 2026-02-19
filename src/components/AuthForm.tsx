@@ -70,14 +70,17 @@ export default function AuthForm({ type }: { type: FormType }) {
       }
 
       if (type === "login") {
-        await api("/auth/signin", {
+        await fetch("/api/login", {
           method: "POST",
-          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             email: values.email,
             password: values.password,
           }),
         });
+
         toast.success("Login realizado com sucesso!");
         router.push("/hub");
       }
