@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
 import { Question } from "@/src/types";
 import { api } from "../services/api";
+import { useRouter } from "next/navigation";
 
 interface Props {
   question: Question;
@@ -30,9 +31,12 @@ export function QuestionCard({ question }: Props) {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [showAllAnswers, setShowAllAnswers] = useState(false);
+  const router = useRouter();
 
   async function handleSubmitAnswer() {
-    if (!answer.trim()) return;
+    if (!answer.trim() || loading) return;
+
+    setLoading(true);
 
     try {
       await api(`/answers/${question.id}`, {
@@ -41,7 +45,7 @@ export function QuestionCard({ question }: Props) {
         body: JSON.stringify({ body: answer }),
       });
       setAnswer("");
-      window.location.reload();
+      router.refresh();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
     } finally {
@@ -58,7 +62,7 @@ export function QuestionCard({ question }: Props) {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Card className="Card cursor-pointer transition-all duration-300 hover:bg-background/30 border-primary lg:w-[80%]">
+          <Card className="Card">
             <CardHeader>
               <CardTitle className=" overflow-hidden w-full lg:w-64">
                 <h1 className="truncate md:text-[20px] lg:text-[25px]">
@@ -81,19 +85,18 @@ export function QuestionCard({ question }: Props) {
           </Card>
         </DialogTrigger>
 
-        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[70vh] lg:min-w-[35vw] lg:min-h-[80vh] ">
+        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[40vw] lg:min-h-[60vh] ">
           <DialogHeader className="self-center">
             <DialogTitle className="text-2xl text-center first-letter:uppercase">
               {question.title}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col space-y-6 ">
+          <div className="flex flex-col space-y-16 ">
             <p className="text-lg text-center font-bold first-letter:uppercase">
               {question.body}
             </p>
 
-            {/* Respostas */}
             <div>
               <div className="flex items-center gap-3">
                 <h3 className="text-lg font-semibold mb-4">
@@ -128,7 +131,7 @@ export function QuestionCard({ question }: Props) {
             </div>
 
             {/* Responder */}
-            <div className="flex flex-col space-y-4 ">
+            <div className="flex flex-col gap-8 ">
               <Textarea
                 placeholder="Escreva sua resposta..."
                 value={answer}
@@ -138,7 +141,7 @@ export function QuestionCard({ question }: Props) {
               <Button
                 onClick={handleSubmitAnswer}
                 disabled={loading}
-                className="cursor-pointer mt-3"
+                className="cursor-pointer "
               >
                 {loading ? "Enviando..." : "Responder"}
               </Button>

@@ -44,9 +44,9 @@ export function QuestionsList({ questions }: Props) {
         </Link>
       </div>
 
-      <div className="flex flex-col w-full justify-center items-center lg:grid lg:grid-cols-3 lg:items-start">
+      <div className="flex flex-col w-full justify-center items-center lg:grid lg:grid-cols-3 lg:w-[80%]">
         {filteredQuestions.length === 0 ? (
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg lg:col-start-2">
             Nenhuma pergunta encontrada 😕
           </p>
         ) : (
