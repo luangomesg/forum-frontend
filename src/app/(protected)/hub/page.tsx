@@ -23,6 +23,7 @@ export default async function Home() {
         Authorization: `Bearer ${token}`,
       },
     });
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     redirect("/");

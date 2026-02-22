@@ -3,16 +3,17 @@
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { QuestionCard } from "@/src/components/QuestionCard";
-import { Question } from "@/src/types";
+import { Question, User } from "@/src/types";
 import Link from "next/link";
 import Image from "next/image";
 import backArrow from "../assets/icons/icons8-voltar-64.png";
 
 interface Props {
   questions: Question[];
+  currentUser: User;
 }
 
-export function QuestionsList({ questions }: Props) {
+export function QuestionsList({ questions, currentUser }: Props) {
   const [search, setSearch] = useState("");
 
   const filteredQuestions = useMemo(() => {
@@ -51,7 +52,11 @@ export function QuestionsList({ questions }: Props) {
           </p>
         ) : (
           filteredQuestions.map((question) => (
-            <QuestionCard key={question.id} question={question} />
+            <QuestionCard
+              key={question.id}
+              question={question}
+              currentUser={currentUser}
+            />
           ))
         )}
       </div>

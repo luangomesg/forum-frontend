@@ -216,6 +216,6 @@ body {
   }
 
   .btn-back-hub-two {
-    @apply border border-sidebar rounded-xl bg-primary text-primary-foreground font-bold cursor-pointer w-[10vw] hover:bg-primary/90 md:w-[6vw] lg:w-11.25;
+    @apply border border-sidebar rounded-xl bg-white text-primary-foreground font-bold cursor-pointer w-[10vw] hover:bg-white/90 md:w-[6vw] lg:w-11.25;
   }
 }

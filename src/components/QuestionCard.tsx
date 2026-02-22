@@ -19,15 +19,17 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
-import { Question } from "@/src/types";
+import { Question, User } from "@/src/types";
 import { api } from "../services/api";
 import { useRouter } from "next/navigation";
+import { DeleteButton } from "./DeleteButton";
 
 interface Props {
   question: Question;
+  currentUser: User;
 }
 
-export function QuestionCard({ question }: Props) {
+export function QuestionCard({ question, currentUser }: Props) {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [showAllAnswers, setShowAllAnswers] = useState(false);
@@ -52,6 +54,7 @@ export function QuestionCard({ question }: Props) {
       setLoading(false);
     }
   }
+
   const hasMoreThanOne = question.answers.length > 1;
 
   const visibleAnswers = showAllAnswers
@@ -87,13 +90,16 @@ export function QuestionCard({ question }: Props) {
 
         <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[40vw] lg:min-h-[60vh] ">
           <DialogHeader className="self-center">
-            <DialogTitle className="text-2xl text-center first-letter:uppercase">
+            {currentUser.id === question.user.id && (
+              <DeleteButton question={question} />
+            )}
+            <DialogTitle className="text-2xl text-center first-letter:uppercase ">
               {question.title}
             </DialogTitle>
           </DialogHeader>
 
           <div className="flex flex-col space-y-16 ">
-            <p className="text-lg text-center font-bold first-letter:uppercase">
+            <p className="text-lg text-center font-bold first-letter:uppercase border border-primary px-3 py-3 rounded-2xl shadow-[0px_0px_10px_3px] shadow-primary">
               {question.body}
             </p>
 
@@ -108,7 +114,7 @@ export function QuestionCard({ question }: Props) {
               {visibleAnswers.map((answer) => (
                 <div
                   key={answer.id}
-                  className="rounded-md p-4 border border-border bg-muted/40 mb-4"
+                  className="rounded-md p-4 border border-border shadow-[0px_0px_10px_5px] shadow-border bg-muted/40 mb-4"
                 >
                   <p className="first-letter:uppercase">{answer.body}</p>
                   <span className="text-sm text-muted-foreground">
@@ -130,7 +136,6 @@ export function QuestionCard({ question }: Props) {
               )}
             </div>
 
-            {/* Responder */}
             <div className="flex flex-col gap-8 ">
               <Textarea
                 placeholder="Escreva sua resposta..."
