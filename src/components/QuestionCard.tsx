@@ -22,7 +22,8 @@ import { formatRelativeTime } from "@/lib/utils";
 import { Question, User } from "@/src/types";
 import { api } from "../services/api";
 import { useRouter } from "next/navigation";
-import { DeleteButton } from "./DeleteButton";
+import { DeleteQuestionButton } from "./DeleteQuestionButton";
+import { DeleteAnswerButton } from "./DeleteAnswerButton";
 
 interface Props {
   question: Question;
@@ -91,7 +92,7 @@ export function QuestionCard({ question, currentUser }: Props) {
         <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[40vw] lg:min-h-[60vh] ">
           <DialogHeader className="self-center">
             {currentUser.id === question.user.id && (
-              <DeleteButton question={question} />
+              <DeleteQuestionButton question={question} />
             )}
             <DialogTitle className="text-2xl text-center first-letter:uppercase ">
               {question.title}
@@ -114,12 +115,15 @@ export function QuestionCard({ question, currentUser }: Props) {
               {visibleAnswers.map((answer) => (
                 <div
                   key={answer.id}
-                  className="rounded-md p-4 border border-border shadow-[0px_0px_10px_5px] shadow-border bg-muted/40 mb-4"
+                  className="rounded-md p-4  border border-border shadow-[0px_0px_10px_5px] shadow-border bg-muted/40 mb-4 lg:mb-6"
                 >
                   <p className="first-letter:uppercase">{answer.body}</p>
                   <span className="text-sm text-muted-foreground">
                     {answer.user.name} • {formatRelativeTime(answer.createdAt)}
                   </span>
+                  {currentUser.id === answer.user.id && (
+                    <DeleteAnswerButton answerId={+answer.id} />
+                  )}
                 </div>
               ))}
 

@@ -12,34 +12,38 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { api } from "../services/api";
-import { Question } from "../types";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface props {
-  question: Question;
+  answerId: number;
 }
 
-export function DeleteButton({ question }: props) {
+export function DeleteAnswerButton({ answerId }: props) {
   const router = useRouter();
-  async function handleDeleteQuestion() {
+
+  async function handleDeleteAnswer() {
     try {
-      await api(`/questions/${question.id}`, {
+      await api(`/answers/${answerId}`, {
         method: "DELETE",
         credentials: "include",
       });
-      toast.success("Pergunta excluida com sucesso");
+      toast.success("Resposta excluida com sucesso");
       router.refresh();
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "Erro ao deletar a pergunta";
+        error instanceof Error ? error.message : "Erro ao deletar a resposta";
       toast.error(errorMessage);
     }
   }
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="cursor-pointer" variant="destructive" size="icon">
+        <Button
+          className="cursor-pointer py-1 px-1 ml-3 translate-y-1"
+          variant="destructive"
+          size={null}
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>
@@ -57,7 +61,7 @@ export function DeleteButton({ question }: props) {
           <AlertDialogAction
             variant="destructive"
             className="cursor-pointer"
-            onClick={handleDeleteQuestion}
+            onClick={handleDeleteAnswer}
           >
             Excluir
           </AlertDialogAction>
