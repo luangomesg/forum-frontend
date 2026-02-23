@@ -1,13 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-interface Params {
-  params: {
-    id: string;
-  };
-}
-
-export async function PATCH(request: Request, { params }: Params) {
+export async function PATCH(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   const body = await request.json();
   const token = (await cookies()).get("access_token")?.value;
 
@@ -19,7 +17,7 @@ export async function PATCH(request: Request, { params }: Params) {
   }
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/questions/${params.id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/questions/${id}`,
     {
       method: "PATCH",
       headers: {
