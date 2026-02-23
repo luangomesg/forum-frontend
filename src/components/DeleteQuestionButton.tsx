@@ -39,7 +39,11 @@ export function DeleteQuestionButton({ question }: props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="cursor-pointer" variant="destructive" size="icon">
+        <Button
+          className="cursor-pointer mx-auto px-1 py-1 absolute top-3 left-4"
+          variant="destructive"
+          size={null}
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

@@ -24,6 +24,7 @@ import { api } from "../services/api";
 import { useRouter } from "next/navigation";
 import { DeleteQuestionButton } from "./DeleteQuestionButton";
 import { DeleteAnswerButton } from "./DeleteAnswerButton";
+import { EditQuestionsButton } from "./EditQuestionsButton";
 
 interface Props {
   question: Question;
@@ -89,12 +90,15 @@ export function QuestionCard({ question, currentUser }: Props) {
           </Card>
         </DialogTrigger>
 
-        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[40vw] lg:min-h-[60vh] ">
+        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[60vw] lg:min-h-[60vh] ">
           <DialogHeader className="self-center">
             {currentUser.id === question.user.id && (
-              <DeleteQuestionButton question={question} />
+              <div>
+                <EditQuestionsButton question={question} />
+                <DeleteQuestionButton question={question} />
+              </div>
             )}
-            <DialogTitle className="text-2xl text-center first-letter:uppercase ">
+            <DialogTitle className="text-2xl text-center first-letter:uppercase mt-5">
               {question.title}
             </DialogTitle>
           </DialogHeader>
