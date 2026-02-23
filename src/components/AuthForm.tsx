@@ -72,6 +72,7 @@ export default function AuthForm({ type }: { type: FormType }) {
       if (type === "login") {
         await fetch("/api/login", {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
