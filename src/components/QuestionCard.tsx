@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import { DeleteQuestionButton } from "./DeleteQuestionButton";
 import { DeleteAnswerButton } from "./DeleteAnswerButton";
 import { EditQuestionsButton } from "./EditQuestionsButton";
+import { EditAnswerButton } from "./EditAnswerButton";
 
 interface Props {
   question: Question;
@@ -126,7 +127,10 @@ export function QuestionCard({ question, currentUser }: Props) {
                     {answer.user.name} • {formatRelativeTime(answer.createdAt)}
                   </span>
                   {currentUser.id === answer.user.id && (
-                    <DeleteAnswerButton answerId={+answer.id} />
+                    <div>
+                      <DeleteAnswerButton answerId={+answer.id} />
+                      <EditAnswerButton answer={answer} />
+                    </div>
                   )}
                 </div>
               ))}
