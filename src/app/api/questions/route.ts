@@ -3,33 +3,24 @@ import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
   const body = await request.json();
+  const token = (await cookies()).get("access_token")?.value;
+
+  if (!token) {
+    return NextResponse.json({ message: "Token is required" }, { status: 401 });
+  }
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/signin`,
+    `${process.env.NEXT_PUBLIC_API_URL}/questions`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(body),
     }
   );
-  
 
   const data = await response.json();
-
-  if (!response.ok) {
-    return NextResponse.json(data, { status: response.status });
-  }
-
-  (await
-        cookies()).set("access_token", data.access_token, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24,
-  });
-
-  return NextResponse.json({ success: true });
+  return NextResponse.json(data, { status: response.status });
 }
