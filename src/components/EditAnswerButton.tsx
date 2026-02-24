@@ -16,7 +16,6 @@ import { Answers } from "../types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { api } from "../services/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -49,9 +48,8 @@ export function EditAnswerButton({ answer }: props) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await api(`/answers/${answer.id}`, {
+      await fetch(`/api/answers/${answer.id}`, {
         method: "PATCH",
-        credentials: "include",
         body: JSON.stringify({
           body: values.body,
         }),

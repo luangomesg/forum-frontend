@@ -11,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { api } from "../services/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -24,9 +23,8 @@ export function DeleteAnswerButton({ answerId }: props) {
 
   async function handleDeleteAnswer() {
     try {
-      await api(`/answers/${answerId}`, {
+      await fetch(`/api/answers/${answerId}`, {
         method: "DELETE",
-        credentials: "include",
       });
       toast.success("Resposta excluida com sucesso");
       router.refresh();
