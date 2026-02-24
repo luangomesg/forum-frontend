@@ -98,7 +98,7 @@ export default function AnswersPage() {
                     className="md:text-[19px] md:py-6"
                     placeholder="Titulo"
                     {...field}
-                    maxLength={60}
+                    maxLength={120}
                   />
                 </FormControl>
                 <div className="min-h-7 ">
