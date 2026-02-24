@@ -54,7 +54,7 @@ export default function AuthForm({ type }: { type: FormType }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (type === "register") {
-        await fetch("/user", {
+        await api("/user", {
           method: "POST",
           credentials: "include",
           body: JSON.stringify({
@@ -70,7 +70,7 @@ export default function AuthForm({ type }: { type: FormType }) {
       }
 
       if (type === "login") {
-        await api("/login", {
+        await fetch("/api/login", {
           method: "POST",
           credentials: "include",
           headers: {

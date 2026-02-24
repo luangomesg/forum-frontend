@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { api } from "@/src/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,7 +46,7 @@ export default function AnswersPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await api("/questions", {
+      await fetch("/api/questions", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({

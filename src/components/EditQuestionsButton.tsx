@@ -22,7 +22,6 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { api } from "../services/api";
 
 const formSchema = z.object({
   title: z
@@ -57,7 +56,7 @@ export function EditQuestionsButton({ question }: props) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await api(`/questions/${question.id}`, {
+      await fetch(`/api/questions/${question.id}`, {
         method: "PATCH",
         body: JSON.stringify({
           title: values.title,
