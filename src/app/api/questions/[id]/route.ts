@@ -32,3 +32,32 @@ export async function PATCH(
 
   return NextResponse.json(data, { status: response.status });
 }
+
+export async function DELETE(
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const token = (await cookies()).get("access_token")?.value;
+
+  if (!token) {
+    return NextResponse.json(
+      { message: "Token is required" },
+      { status: 401 }
+    );
+  }
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/questions/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  return NextResponse.json(data, { status: response.status });
+}

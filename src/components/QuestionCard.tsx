@@ -20,7 +20,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
 import { Question, User } from "@/src/types";
-import { api } from "../services/api";
 import { useRouter } from "next/navigation";
 import { DeleteQuestionButton } from "./DeleteQuestionButton";
 import { DeleteAnswerButton } from "./DeleteAnswerButton";
@@ -44,9 +43,8 @@ export function QuestionCard({ question, currentUser }: Props) {
     setLoading(true);
 
     try {
-      await api(`/answers/${question.id}`, {
+      await fetch(`/api/answers/${question.id}`, {
         method: "POST",
-        credentials: "include",
         body: JSON.stringify({ body: answer }),
       });
       setAnswer("");

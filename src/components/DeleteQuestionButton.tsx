@@ -11,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { api } from "../services/api";
 import { Question } from "../types";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -24,7 +23,7 @@ export function DeleteQuestionButton({ question }: props) {
   const router = useRouter();
   async function handleDeleteQuestion() {
     try {
-      await api(`/questions/${question.id}`, {
+      await fetch(`/api/questions/${question.id}`, {
         method: "DELETE",
         credentials: "include",
       });
