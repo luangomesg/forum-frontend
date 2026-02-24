@@ -23,7 +23,7 @@ const formSchema = z.object({
   title: z
     .string()
     .min(6, "O titulo deve ter pelo menos 6 caracteres!")
-    .max(60, "O titulo não deve passar de 60 caracteres!")
+    .max(80, "O titulo não deve passar de 80 caracteres!")
     .nonempty(),
 
   body: z
@@ -98,7 +98,6 @@ export default function AnswersPage() {
                     className="md:text-[19px] md:py-6"
                     placeholder="Titulo"
                     {...field}
-                    maxLength={120}
                   />
                 </FormControl>
                 <div className="min-h-7 ">
