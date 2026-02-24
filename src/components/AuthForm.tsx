@@ -70,9 +70,8 @@ export default function AuthForm({ type }: { type: FormType }) {
       }
 
       if (type === "login") {
-        await fetch("/api/login", {
+        const response = await fetch("/api/login", {
           method: "POST",
-          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -81,6 +80,13 @@ export default function AuthForm({ type }: { type: FormType }) {
             password: values.password,
           }),
         });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          toast.error(data.message || "Email ou senha inválidos");
+          return;
+        }
 
         toast.success("Login realizado com sucesso!");
         router.push("/hub");
