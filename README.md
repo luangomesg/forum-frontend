@@ -95,7 +95,7 @@ npm run dev
 ### 3️⃣ Criar .env
 
 ```bash
-NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 ---
 
