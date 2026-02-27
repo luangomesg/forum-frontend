@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💬 YourForum
 
-## Getting Started
+Uma aplicação fullstack de fórum desenvolvida com foco em autenticação segura, arquitetura moderna e boas práticas de produção.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tecnologias Utilizadas
+
+### Frontend
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- ShadCN/UI
+- React Hook Form
+- Zod
+- Sonner (toast)
+
+### Backend
+- NestJS
+- Prisma ORM
+- PostgreSQL
+- JWT Authentication
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto utiliza o padrão **BFF (Backend For Frontend)**.
+
+Fluxo de autenticação:
+
+Cliente → Next.js Route Handler → Backend NestJS
+
+- O login salva o token JWT em cookie `httpOnly`
+- As rotas protegidas passam pelo Next.js
+- O Next injeta o `Authorization: Bearer` no header
+- O backend valida o token
+
+Isso evita:
+- Exposição do token no `localStorage`
+- Problemas de CORS
+- Vulnerabilidades XSS
+
+---
+
+## 🔐 Funcionalidades
+
+- Registro de usuário
+- Login com autenticação JWT
+- Criação de perguntas
+- Edição de perguntas
+- Exclusão de perguntas
+- Criação de respostas
+- Exclusão de respostas
+- Rotas protegidas
+- Validação com Zod
+- Feedback visual com toast
+
+---
+
+## 📂 Estrutura Simplificada
+
+```text
+frontend/
+├── app/
+│ ├── api/ (proxy BFF)
+│ ├── login/
+│ ├── register/
+│ └── hub/
+backend/
+├── auth/
+├── user/
+├── questions/
+└── answers/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Como rodar o projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1️⃣ Clonar o repositório
 
-## Learn More
+```bash
+git clone https://github.com/luangomesg/forum-frontend.git
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2️⃣ Rodar projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd forum-frontend
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3️⃣ Criar .env
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 Aprendizados
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Durante o desenvolvimento foram aplicados conceitos importantes como:
+
+- Arquitetura BFF
+
+- Cookies httpOnly
+
+- Segurança em autenticação
+
+- Tratamento correto de respostas HTTP
+
+- Integração frontend ↔ backend
+
+- Estruturação de API com Next.js App Router
+
+- 🌎 Deploy
+
+- Frontend: Vercel
+
+- Backend: Render
+
+- Banco: PostgreSQL
+
+## 📌 Objetivo do Projeto
+
+Este projeto foi desenvolvido com o objetivo de praticar:
+
+- Desenvolvimento Fullstack moderno
+
+- Autenticação segura em produção
+
+- Boas práticas de organização de código
+
+- Integração real entre frontend e backend
+
+## 👨‍💻 Autor
+## Desenvolvido por Luan Gomes Galvão.
