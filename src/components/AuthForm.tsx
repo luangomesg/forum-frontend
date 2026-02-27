@@ -99,6 +99,13 @@ export default function AuthForm({ type }: { type: FormType }) {
   }
   const isLogin = type === "login";
   const isSubmitting = form.formState.isSubmitting;
+  setTimeout(() => {
+    if (isSubmitting)
+      toast.loading(
+        "Servidor está carregando... Pode demorar cerca de 1 minuto para responder",
+      );
+  }, 6000);
+  toast.dismiss();
 
   return (
     <Form {...form} key={type}>
