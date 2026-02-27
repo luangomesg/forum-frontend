@@ -112,7 +112,7 @@ export function QuestionCard({ question, currentUser }: Props) {
           </Card>
         </DialogTrigger>
 
-        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[60vw] lg:min-h-[60vh] ">
+        <DialogContent className="w-[90%] max-h-[85vh] overflow-y-auto border border-primary md:min-w-[80vw] md:min-h-[50vh] lg:min-w-[50vw] lg:min-h-[60vh] ">
           <DialogHeader className="self-center">
             {currentUser.id === question.user.id && (
               <div>
