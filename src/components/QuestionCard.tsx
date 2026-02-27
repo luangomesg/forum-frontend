@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -36,6 +35,14 @@ export function QuestionCard({ question, currentUser }: Props) {
   const [loading, setLoading] = useState(false);
   const [showAllAnswers, setShowAllAnswers] = useState(false);
   const router = useRouter();
+  const chartColors = [
+    "var(--chart-1)",
+    "var(--chart-2)",
+    "var(--chart-3)",
+    "var(--chart-4)",
+    "var(--chart-5)",
+  ];
+  const random = chartColors[Math.floor(Math.random() * chartColors.length)];
 
   async function handleSubmitAnswer() {
     if (!answer.trim() || loading) return;
@@ -68,24 +75,40 @@ export function QuestionCard({ question, currentUser }: Props) {
         <DialogTrigger asChild>
           <Card className="Card">
             <CardHeader>
-              <CardTitle className=" overflow-hidden w-full lg:w-64">
-                <h1 className="truncate md:text-[20px] lg:text-[25px]">
+              <div className=" flex items-center justify-start gap-2">
+                <div
+                  className="rounded-[50%] w-6.25 "
+                  style={{ backgroundColor: random }}
+                >
+                  <span className=" capitalize">
+                    {question.user.name.charAt(0)}
+                  </span>
+                </div>
+                <p className="text-[0.87rem] capitalize md:text-[1rem]">
+                  {question.user.name}
+                </p>{" "}
+                •{" "}
+                <span className="text-[0.87rem] font-normal">
+                  {formatRelativeTime(question.createdAt)}
+                </span>
+              </div>
+
+              <CardTitle className="text-start">
+                <h1 className="first-letter:uppercase md:text-[20px] lg:text-[25px]">
                   {question.title}
                 </h1>
               </CardTitle>
+              <CardContent className=" ">
+                <p className="line-clamp-2 first-letter:uppercase text-start text-[0.87rem] text-neutral-custom">
+                  {question.body}
+                </p>
+              </CardContent>
               <CardDescription className="md:text-[1rem] lg:text-[1.1rem]">
                 {question.answers.length === 1
                   ? "1 resposta"
                   : `${question.answers.length} respostas`}{" "}
-                • {formatRelativeTime(question.createdAt)}
               </CardDescription>
             </CardHeader>
-
-            <CardContent className="flex gap-2 mx-auto">
-              <Badge className="md:text-[1rem]">
-                Criador: {question.user.name}
-              </Badge>
-            </CardContent>
           </Card>
         </DialogTrigger>
 
@@ -103,7 +126,7 @@ export function QuestionCard({ question, currentUser }: Props) {
           </DialogHeader>
 
           <div className="flex flex-col space-y-16 ">
-            <p className="text-lg text-center font-bold first-letter:uppercase border border-primary px-3 py-3 rounded-2xl shadow-[0px_0px_10px_3px] shadow-primary">
+            <p className="text-lg text-center font-bold first-letter:uppercase border border-primary px-3 py-3 rounded-2xl ">
               {question.body}
             </p>
 

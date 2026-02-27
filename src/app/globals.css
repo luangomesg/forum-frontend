@@ -48,10 +48,13 @@
   --sidebar-ring: oklch(0.6 0 0);
 
   --auth-background: oklch(0.96 0.01 260);
+
+  --neutral-custom: oklch(0.35 0.02 240);
+  --custom-bg-hover: oklch(0.88 0.015 250);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.18 0.01 250);
   --foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
@@ -83,6 +86,8 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --auth-background: oklch(0.18 0.02 260);
+  --neutral-custom: oklch(0.84 0.01 240);
+  --custom-bg-hover: oklch(0.24 0.015 250);
 }
 
 @theme inline {
@@ -127,6 +132,8 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   --color-auth: var(--auth-background);
+  --color-neutral-custom: var(--neutral-custom);
+  --color-custom-bg-hover: var(--custom-bg-hover);
 }
 
 body {
@@ -138,7 +145,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }
 
@@ -184,7 +191,7 @@ body {
   }
 
   .auth-layout {
-    @apply flex flex-col justify-center items-center mx-auto min-h-screen max-sm:px-4 bg-auth;
+    @apply flex flex-col justify-center items-center mx-auto min-h-screen max-sm:px-4 bg-background;
   }
 
   .hub {
@@ -196,10 +203,10 @@ body {
   }
 
   .questions {
-    @apply flex flex-col justify-evenly items-center font-bold text-center w-full px-8 py-5 min-h-[95vh];
+    @apply flex flex-col justify-evenly items-center font-bold text-center w-screen  px-8 py-5 min-h-[95vh] bg-background;
 
     .Card {
-      @apply w-full max-w-77.5 max-h-42.5 cursor-pointer transition-all duration-300 hover:bg-background/30 border-primary  md:w-[80%] mt-15 lg:mx-auto lg:w-full;
+      @apply w-[90%] cursor-pointer transition-all duration-300 hover:bg-custom-bg-hover border-r border-t border-b border-sidebar-ring md:w-[80%] lg:mx-auto lg:w-full lg:border-r-0;
     }
   }
 

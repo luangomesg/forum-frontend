@@ -45,7 +45,7 @@ export function QuestionsList({ questions, currentUser }: Props) {
         </Link>
       </div>
 
-      <div className="flex flex-col w-full justify-center items-center lg:grid lg:grid-cols-3 lg:w-[80%]">
+      <div className="flex flex-col w-screen justify-center items-center mt-15 lg:w-[50%]">
         {filteredQuestions.length === 0 ? (
           <p className="text-muted-foreground text-lg lg:col-start-2">
             Nenhuma pergunta encontrada 😕
