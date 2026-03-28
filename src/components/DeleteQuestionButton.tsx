@@ -42,6 +42,7 @@ export function DeleteQuestionButton({ question }: props) {
           className="cursor-pointer mx-auto px-1 py-1 absolute top-3 left-4"
           variant="destructive"
           size={null}
+          data-testid="delete-question"
         >
           <Trash2 />
         </Button>

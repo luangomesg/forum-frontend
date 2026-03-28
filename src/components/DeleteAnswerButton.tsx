@@ -41,6 +41,7 @@ export function DeleteAnswerButton({ answerId }: props) {
           className="cursor-pointer py-1 px-1 ml-3 translate-y-1"
           variant="destructive"
           size={null}
+          data-testid="delete-answer"
         >
           <Trash2 />
         </Button>
