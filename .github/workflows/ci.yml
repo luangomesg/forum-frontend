@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BASE_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
     steps:
       - name: Baixar código
@@ -31,10 +31,10 @@ jobs:
       - name: Rodar build
         run: npm run build
 
-      - name: Rodar aplicação (produção)
-        run: npm run start &
+      - name: Rodar aplicação
+        run: npm start &
 
-      - name: Esperar servidor subir
+      - name: Esperar subir
         run: npx wait-on http://localhost:3000
 
       - name: Rodar testes E2E
