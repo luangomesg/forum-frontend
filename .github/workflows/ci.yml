@@ -12,6 +12,7 @@ jobs:
 
     env:
       NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Baixar código
@@ -28,14 +29,14 @@ jobs:
       - name: Instalar Playwright
         run: npx playwright install --with-deps
 
-      - name: Rodar build
+      - name: Build
         run: npm run build
 
-      - name: Rodar aplicação
+      - name: Rodar app
         run: npm start &
 
-      - name: Esperar subir
+      - name: Esperar app
         run: npx wait-on http://localhost:3000
 
-      - name: Rodar testes E2E
+      - name: Rodar testes
         run: npx playwright test
