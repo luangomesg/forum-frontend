@@ -12,7 +12,6 @@ jobs:
 
     env:
       NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Baixar código
@@ -21,7 +20,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24.
 
       - name: Instalar dependências
         run: npm install
